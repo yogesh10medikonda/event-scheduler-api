@@ -1,0 +1,659 @@
+{
+    "info": {
+        "name": "Event Scheduler API",
+        "description": "Complete POSTMAN collection for Event Scheduler REST API with CRUD operations",
+        "version": "1.0.0",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:5000/api",
+            "type": "string",
+            "description": "Base URL for the Event Scheduler API"
+        }
+    ],
+    "item": [
+        {
+            "name": "Events",
+            "description": "Event management operations",
+            "item": [
+                {
+                    "name": "Get All Events",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "events"
+                            ]
+                        },
+                        "description": "Retrieve all events sorted by start time (earliest first)"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/events",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"title\": \"Team Meeting\",\n      \"description\": \"Weekly team sync\",\n      \"start_time\": \"2025-06-29T09:00:00\",\n      \"end_time\": \"2025-06-29T10:00:00\",\n      \"created_at\": \"2025-06-28T12:00:00\",\n      \"updated_at\": \"2025-06-28T12:00:00\"\n    }\n  ],\n  \"count\": 1\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Event by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/events/550e8400-e29b-41d4-a716-446655440000",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "events",
+                                "550e8400-e29b-41d4-a716-446655440000"
+                            ]
+                        },
+                        "description": "Retrieve a specific event by its ID"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/events/550e8400-e29b-41d4-a716-446655440000",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events",
+                                        "550e8400-e29b-41d4-a716-446655440000"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"title\": \"Team Meeting\",\n    \"description\": \"Weekly team sync\",\n    \"start_time\": \"2025-06-29T09:00:00\",\n    \"end_time\": \"2025-06-29T10:00:00\",\n    \"created_at\": \"2025-06-28T12:00:00\",\n    \"updated_at\": \"2025-06-28T12:00:00\"\n  }\n}"
+                        },
+                        {
+                            "name": "Event Not Found",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/events/invalid-id",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events",
+                                        "invalid-id"
+                                    ]
+                                }
+                            },
+                            "status": "Not Found",
+                            "code": 404,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": false,\n  \"error\": \"Event not found\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create New Event",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Project Review Meeting\",\n  \"description\": \"Review project progress and discuss next steps\",\n  \"start_time\": \"2025-06-30T14:00:00\",\n  \"end_time\": \"2025-06-30T15:30:00\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "events"
+                            ]
+                        },
+                        "description": "Create a new event with title, description, start_time, and end_time"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"Project Review Meeting\",\n  \"description\": \"Review project progress and discuss next steps\",\n  \"start_time\": \"2025-06-30T14:00:00\",\n  \"end_time\": \"2025-06-30T15:30:00\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/events",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events"
+                                    ]
+                                }
+                            },
+                            "status": "Created",
+                            "code": 201,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n    \"title\": \"Project Review Meeting\",\n    \"description\": \"Review project progress and discuss next steps\",\n    \"start_time\": \"2025-06-30T14:00:00\",\n    \"end_time\": \"2025-06-30T15:30:00\",\n    \"created_at\": \"2025-06-28T12:30:00\",\n    \"updated_at\": \"2025-06-28T12:30:00\"\n  },\n  \"message\": \"Event created successfully\"\n}"
+                        },
+                        {
+                            "name": "Validation Error",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"\",\n  \"start_time\": \"2025-06-30T15:00:00\",\n  \"end_time\": \"2025-06-30T14:00:00\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/events",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events"
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": false,\n  \"error\": \"Validation failed\",\n  \"details\": [\n    \"Title cannot be empty\",\n    \"End time must be after start time\"\n  ]\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Event",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Updated Project Review\",\n  \"description\": \"Updated description for the review meeting\",\n  \"end_time\": \"2025-06-30T16:00:00\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/events/550e8400-e29b-41d4-a716-446655440001",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "events",
+                                "550e8400-e29b-41d4-a716-446655440001"
+                            ]
+                        },
+                        "description": "Update an existing event (partial updates supported)"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"Updated Project Review\",\n  \"description\": \"Updated description for the review meeting\",\n  \"end_time\": \"2025-06-30T16:00:00\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/events/550e8400-e29b-41d4-a716-446655440001",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events",
+                                        "550e8400-e29b-41d4-a716-446655440001"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n    \"title\": \"Updated Project Review\",\n    \"description\": \"Updated description for the review meeting\",\n    \"start_time\": \"2025-06-30T14:00:00\",\n    \"end_time\": \"2025-06-30T16:00:00\",\n    \"created_at\": \"2025-06-28T12:30:00\",\n    \"updated_at\": \"2025-06-28T13:00:00\"\n  },\n  \"message\": \"Event updated successfully\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Event",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/events/550e8400-e29b-41d4-a716-446655440001",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "events",
+                                "550e8400-e29b-41d4-a716-446655440001"
+                            ]
+                        },
+                        "description": "Delete an event by its ID"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/events/550e8400-e29b-41d4-a716-446655440001",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events",
+                                        "550e8400-e29b-41d4-a716-446655440001"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Event deleted successfully\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Search Events",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/events/search?q=meeting",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "events",
+                                "search"
+                            ],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "meeting",
+                                    "description": "Search query for title or description"
+                                }
+                            ]
+                        },
+                        "description": "Search events by title or description"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/events/search?q=meeting",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "events",
+                                        "search"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "q",
+                                            "value": "meeting"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"title\": \"Team Meeting\",\n      \"description\": \"Weekly team sync\",\n      \"start_time\": \"2025-06-29T09:00:00\",\n      \"end_time\": \"2025-06-29T10:00:00\",\n      \"created_at\": \"2025-06-28T12:00:00\",\n      \"updated_at\": \"2025-06-28T12:00:00\"\n    }\n  ],\n  \"count\": 1,\n  \"query\": \"meeting\"\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Reminders",
+            "description": "Event reminder operations - check events due within the next hour",
+            "item": [
+                {
+                    "name": "Get Active Reminders",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reminders",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reminders"
+                            ]
+                        },
+                        "description": "Get all active reminders for events due within the next hour"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/reminders",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "reminders"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"event_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"title\": \"Team Meeting\",\n      \"description\": \"Weekly team sync\",\n      \"start_time\": \"2025-06-29T14:00:00\",\n      \"end_time\": \"2025-06-29T15:00:00\",\n      \"minutes_until\": 30,\n      \"reminder_time\": \"2025-06-29T13:30:00\"\n    }\n  ],\n  \"count\": 1,\n  \"message\": \"Found 1 events due within the next hour\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Force Reminder Check",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reminders/check",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reminders",
+                                "check"
+                            ]
+                        },
+                        "description": "Force an immediate reminder check (useful for testing)"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/reminders/check",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "reminders",
+                                        "check"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Reminder check completed\",\n  \"data\": [],\n  \"count\": 0\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Reminder Service Status",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reminders/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reminders",
+                                "status"
+                            ]
+                        },
+                        "description": "Get the status of the reminder service"
+                    },
+                    "response": [
+                        {
+                            "name": "Success Response",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{base_url}}/reminders/status",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "reminders",
+                                        "status"
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"success\": true,\n  \"data\": {\n    \"service_running\": true,\n    \"active_reminders\": 2,\n    \"has_reminders\": true,\n    \"next_check\": \"Every minute\"\n  }\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Health Check",
+            "item": [
+                {
+                    "name": "API Root",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:5000/",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000",
+                            "path": [
+                                ""
+                            ]
+                        },
+                        "description": "Check if the API server is running"
+                    }
+                },
+                {
+                    "name": "API Documentation",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:5000/api/docs",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000",
+                            "path": [
+                                "api",
+                                "docs"
+                            ]
+                        },
+                        "description": "View API documentation"
+                    }
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ]
+}

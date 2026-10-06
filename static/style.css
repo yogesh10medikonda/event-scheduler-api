@@ -1,0 +1,145 @@
+/* Custom styles for Event Scheduler API */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Code blocks styling */
+pre {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--bs-border-color);
+}
+
+code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+}
+
+/* Badge styling for HTTP methods */
+.badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Table styling */
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: var(--bs-primary);
+}
+
+/* Button styling */
+.btn {
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Icon styling */
+.fa-4x {
+    font-size: 4rem;
+}
+
+/* Custom spacing */
+.py-6 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .fa-4x {
+        font-size: 3rem;
+    }
+    
+    pre {
+        font-size: 0.75rem;
+    }
+}
+
+/* Dark theme enhancements */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #1a1a1a;
+    --bs-body-color: #e9ecef;
+}
+
+[data-bs-theme="dark"] .card {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+}
+
+[data-bs-theme="dark"] pre {
+    background-color: #1a1a1a !important;
+    border-color: #404040;
+}
+
+[data-bs-theme="dark"] .table {
+    --bs-table-bg: transparent;
+    --bs-table-border-color: #404040;
+}
+
+[data-bs-theme="dark"] .navbar-dark {
+    background-color: #0d47a1 !important;
+}
+
+/* Custom scrollbar for code blocks */
+pre::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: #2d2d2d;
+    border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.nav-link:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    outline: none;
+}
+
+/* Animation for hero section */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-body {
+    animation: fadeInUp 0.6s ease-out;
+}
